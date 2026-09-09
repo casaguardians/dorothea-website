@@ -1,7 +1,7 @@
 // Dorothea contact configuration
 // Replace these two values when you have the final business contact details.
-const WHATSAPP_NUMBER = ""; // International format, digits only. Example: 34600111222
-const CONTACT_EMAIL = "";   // Example: hello@yourdomain.com
+const WHATSAPP_NUMBER = "34678718052"; 
+const CONTACT_EMAIL = "info@casaguardians.com";  
 
 const header = document.querySelector('.site-header');
 const menuToggle = document.querySelector('.menu-toggle');

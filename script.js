@@ -63,10 +63,36 @@ form?.addEventListener('submit', (e) => {
   }
 });
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.12 });
+// Animate only the three selected sections, once per page visit.
+// Content stays readable if animation or JavaScript is unavailable.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      if (reducedMotion.matches || typeof entry.target.animate !== 'function') return;
+      const card = entry.target.classList.contains('model-card');
+      const index = card ? [...entry.target.parentElement.children].indexOf(entry.target) : 0;
+      const animation = entry.target.animate([
+        { opacity: 0, transform: 'translateY(18px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], {
+        duration: 850,
+        delay: card && window.innerWidth > 1000 ? index * 100 : 0,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        fill: 'backwards'
+      });
+      const stopMotion = () => { if (reducedMotion.matches) animation.cancel(); };
+      reducedMotion.addEventListener('change', stopMotion);
+      animation.finished.catch(() => {}).finally(() => {
+        reducedMotion.removeEventListener('change', stopMotion);
+      });
+    });
+  }, { threshold: 0.12 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll(
+    '#about .portrait-wrap, #about .founder-copy, ' +
+    '#new-home .feature-image, #new-home .feature-copy, .model-card'
+  ).forEach(el => observer.observe(el));
+}

@@ -4,3 +4,9 @@
 @media(max-width:1150px){.nav,.header-cta{display:none}.menu-toggle{display:block;margin-left:auto}.site-header.open .nav{display:flex;position:absolute;top:92px;left:0;right:0;background:#f4efe7;padding:2rem 6vw;flex-direction:column}}
 @media(max-width:1000px){.founder-grid,.split,.contact-grid,.model-grid{grid-template-columns:1fr}.feature-image{min-height:520px}.service-grid,.value-grid,.steps{grid-template-columns:1fr 1fr}.footer{grid-template-columns:1fr}.footer-links{justify-content:flex-start;flex-wrap:wrap}}
 @media(max-width:640px){.section-pad{padding:6rem 6vw}.site-header{height:78px}.brand img{height:56px}.site-header.open .nav{top:78px}.hero-content{padding:8rem 6vw 4.5rem}.hero-actions,.contact-actions{flex-direction:column;align-items:stretch}.btn{width:100%}.service-grid,.value-grid,.steps{grid-template-columns:1fr}.feature-image{min-height:420px}.model-card{padding:2rem}.floating-whatsapp{right:14px;bottom:14px}.footer img{max-width:220px}}
+
+/* Neoclassical villa hero; keep the facade in frame on narrow screens. */
+.hero-image{background-image:url('dorothea-hero.png.png');background-position:center}
+@media(max-width:640px){.hero-image{background-position:65% center}}
+.reveal{opacity:1;transform:none;transition:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

@@ -209,11 +209,34 @@
           </div>
         </div>
 
-        <form class="contact-form reveal" id="contact-form">
-          <label>Name<input type="text" name="name" required></label>
-          <label>Email or WhatsApp<input type="text" name="contact" required></label>
-          <label>Property location<input type="text" name="location"></label>
-          <label>What would you like help with?
+        <form
+          class="contact-form reveal"
+          id="contact-form"
+          action="https://formsubmit.co/info@dorotheaconcierge.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="Private enquiry — Dorothea">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://dorotheaconcierge.com/?sent=1">
+
+          <label>
+            Name
+            <input type="text" name="name" required>
+          </label>
+
+          <label>
+            Email or WhatsApp
+            <input type="text" name="contact" required>
+          </label>
+
+          <label>
+            Property location
+            <input type="text" name="location">
+          </label>
+
+          <label>
+            What would you like help with?
             <select name="service" id="service-interest" required>
               <option value="" disabled selected>Select a service</option>
               <option>New home setup</option>
@@ -222,10 +245,13 @@
               <option>Not sure yet</option>
             </select>
           </label>
-          <label>How can I help?<textarea name="message" rows="5" required></textarea></label>
-          <button class="btn btn-dark" type="submit">Continue to email</button>
-          <p class="small-note">This opens your email app with your enquiry ready to review and send. Prefer WhatsApp? Use the message button instead.</p>
-          <p class="form-status" aria-live="polite"></p>
+
+          <label>
+            How can I help?
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+
+          <button class="btn btn-dark" type="submit">Send private enquiry</button>
         </form>
       </div>
     </section>

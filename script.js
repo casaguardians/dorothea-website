@@ -1,5 +1,5 @@
 // Dorothea contact configuration
-// Replace these two values when you have the final business contact details.
+// Existing business contact details.
 const WHATSAPP_NUMBER = "34678718052"; 
 const CONTACT_EMAIL = "info@casaguardians.com";  
 
@@ -12,7 +12,16 @@ menuToggle?.addEventListener('click', () => {
 });
 
 document.querySelectorAll('.nav a').forEach(link => {
-  link.addEventListener('click', () => header.classList.remove('open'));
+  link.addEventListener('click', () => {
+    header.classList.remove('open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+  });
+});
+
+document.querySelectorAll('[data-service]').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('#service-interest').value = link.dataset.service;
+  });
 });
 
 const whatsappUrl = WHATSAPP_NUMBER
@@ -42,11 +51,13 @@ form?.addEventListener('submit', (e) => {
     `Name: ${data.get('name')}\n` +
     `Contact: ${data.get('contact')}\n` +
     `Property location: ${data.get('location')}\n\n` +
+    `Service: ${data.get('service')}\n\n` +
     `How can I help?\n${data.get('message')}`
   );
 
   if (CONTACT_EMAIL) {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    status.textContent = "Your enquiry is ready in your email app. Please press Send there. If it did not open, you can contact us on WhatsApp.";
   } else {
     status.textContent = "The form is ready — add your email address in script.js to activate sending.";
   }
